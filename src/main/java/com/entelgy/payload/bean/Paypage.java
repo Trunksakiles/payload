@@ -9,9 +9,9 @@ public class Paypage {
 	private Integer page;
 	private Integer per_page;
 	private Integer total;
-	private Integer total_pages;
-	private List<User> data;
-	private Datos_extra support;
+	private Integer total_pages; // datos de arriba
+	private List<User> data;	// datos de usuarios
+	private Datos_extra support;// datos inferiores
 	public Paypage(Integer page, Integer per_page, Integer total, Integer total_pages, List<User> data,
 			Datos_extra support) {
 		super();
