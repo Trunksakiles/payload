@@ -1,21 +1,18 @@
-package com.entelgy.payload.bean;
+package com.entelgy.payload.dto;
 
-public class User {
+import java.io.Serializable;
+
+import org.springframework.stereotype.Component;
+
+public class User implements Serializable{
 
 	private Integer id;
 	private String email;
 	private String first_name;
 	private String last_name;
 	private String avatar;
-
-	public User(Integer id, String email, String first_name, String last_name, String avatar) {
-		super();
-		this.id = id;
-		this.email = email;
-		this.first_name = first_name;
-		this.last_name = last_name;
-		this.avatar = avatar;
-	}
+	
+	
 
 	public Integer getId() {
 		return id;

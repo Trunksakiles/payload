@@ -1,13 +1,12 @@
-package com.entelgy.payload.bean;
+package com.entelgy.payload.dto;
 
-public class Datos_extra {
+import java.io.Serializable;
+
+public class DatosExtra implements Serializable{
+
 private String url;
 private String text;
-public Datos_extra(String url, String text) {
-	super();
-	this.url = url;
-	this.text = text;
-}
+
 public String getUrl() {
 	return url;
 }
@@ -20,7 +19,5 @@ public String getText() {
 public void setText(String text) {
 	this.text = text;
 }
-
-
 
 }
