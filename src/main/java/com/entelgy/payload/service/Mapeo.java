@@ -1,9 +1,7 @@
 package com.entelgy.payload.service;
 
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.entelgy.payload.dto.DataEntrada;
@@ -12,16 +10,14 @@ import com.entelgy.payload.dto.User;
 
 @Service("mapeo")
 public class Mapeo {		
-	@Autowired
 	Tiempo tiempo;
-	@Autowired
 	Consumo consumo;
 		
-	
-	/*public Mapeo (Tiempo tiempo,Consumo consumo) {
+	@Autowired
+	public Mapeo (Tiempo tiempo,Consumo consumo) {
 		this.tiempo=tiempo;
 		this.consumo=consumo;		
-	}*/
+	}
 
 	public DataSalida reestructurar_datos() {
 
@@ -41,23 +37,4 @@ public class Mapeo {
 		DataSalida data_salida = new DataSalida(srtFecha, list_strDatos);
 		return data_salida;
 	}
-	/*
-	 * public DataSalida reestructurar_datos(String srtFecha,DataEntrada data_entrada) {
-		DataSalida data_salida = new DataSalida();
-		
-		List<User> lista_usuarios = data_entrada.getData();
-		List<String> list_strDatos = new ArrayList<String>();
-
-		for (User cada_usuario : lista_usuarios) {
-			String strdata = new String(
-					cada_usuario.getId() + "|" + cada_usuario.getLast_name() + "|" + cada_usuario.getEmail());
-			list_strDatos.add(strdata);
-		}
-		
-		data_salida.setOperationDate(srtFecha);
-		data_salida.setData(list_strDatos);
-		return data_salida;
-	}*/
-	 
-
 }

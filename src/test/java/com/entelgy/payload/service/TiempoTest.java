@@ -4,13 +4,13 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class TiempoTest {
-	
-	Tiempo tiempo=new Tiempo();
+
+	Tiempo tiempo = new Tiempo();
 
 	@Test
 	void testVerificarFecha() {
 		String fechaTexto = tiempo.obtenerFecha();
-		Assertions.assertEquals("2022-05-26", fechaTexto.substring(0, 10));
+		Assertions.assertEquals("2022-05-27", fechaTexto.substring(0, 10));
 	}
 
 	@Test
