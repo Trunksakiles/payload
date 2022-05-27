@@ -1,30 +1,66 @@
 package com.entelgy.payload.service;
 
 import java.net.URISyntaxException;
+import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
+import com.entelgy.payload.dto.DataEntrada;
 import com.entelgy.payload.dto.DataSalida;
 
 class MapeoTest {
 	
-	Mapeo mapeo;
+	/*Tiempo tiempoMock=Mockito.mock(Tiempo.class);
+	Consumo consumoMock=Mockito.mock(Consumo.class);
+	Mapeo mapeo=new Mapeo(tiempoMock, consumoMock);*/
 	
-	DataSalida datasalida =new DataSalida();
+	@InjectMocks
+	private Mapeo mapeo;
+
+	
+	//private Tiempo tiempo/*=new Tiempo()*/;
+	@Mock
+	Tiempo mockTiempo; /*= Mockito.mock(Tiempo.class);*/
+	//Tiempo tiempo =new Tiempo();
+	@Mock
+	Consumo mockConsumo; /*= Mockito.mock(Consumo.class);*/
+	//Consumo consumo = new Consumo();
+	/*DataEntrada mockDataEntrada = Mockito.mock(DataEntrada.class);
+	DataEntrada dataEntrada = new DataEntrada();
+	DataSalida mockDataSalida = Mockito.mock(DataSalida.class);*/
+	
+	@BeforeEach
+	void setUp() {		
+	
+		Mockito.when(mockTiempo.obtenerFecha()).thenReturn("2022-05-24");
+		//Mockito.when(mockConsumo.consumir().getPage()).thenReturn(1);
+		//Mockito.when(mockConsumo.consumir()).thenReturn(mockDataEntrada);
+		/*Mockito.when(mapeo.reestructurar_datos().getOperationDate()).thenReturn("2022-05-25");
+		Mockito.when(mockConsumo.consumir().getPage()).thenReturn(1);
+		Mockito.when(new DataSalida("2022-05-24", null)).thenReturn(MockDataSalida);*/
+		//dataEntrada= consumo.consumir();
+	}
+
 	@Test
+	
 	void testVerificarRestupesta() throws URISyntaxException {
-		mapeo= new Mapeo();
-		//DataSalida data_salida= new DataSalida();
-//		Assertions.assertEquals(datasalida, mapeo.reestructurar_datos());
-		Assertions.assertNotNull(mapeo.reestructurar_datos());
-	}
-	@Test
-	void testVerificarNulo() throws URISyntaxException {
+		/*String fechaTexto = tiempo.obtenerFecha();
+		Assertions.assertEquals("2022-05-25", fechaTexto.substring(0, 10));*/ //si funciona
+	//	mockDataEntrada= consumo.consumir();
+		Assertions.assertEquals("2022-05-24",mockTiempo.obtenerFecha());
+		//System.out.println(dataEntrada);
 		
-		Assertions.assertNotNull(mapeo.reestructurar_datos());
 	}
+	/*@Test
+	void testVerificarNulo() throws URISyntaxException {
+		Assertions.assertNotNull(mapeo.reestructurar_datos()) ;
+	}*/
 	
 	
 	

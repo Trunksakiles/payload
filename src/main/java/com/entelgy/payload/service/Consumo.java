@@ -1,6 +1,5 @@
 package com.entelgy.payload.service;
 
-import java.net.URISyntaxException;
 import java.util.Arrays;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -14,9 +13,9 @@ import com.entelgy.payload.dto.DataEntrada;
 @Service("consumo")
 public class Consumo {
 
-	public DataEntrada consumir() throws URISyntaxException {
+	public DataEntrada consumir() {
 		RestTemplate restTemplate = new RestTemplate();
-
+		
 		//Data_entrada responseJson = restTemplate.getForObject("https://reqres.in/api/users", Data_entrada.class);
 		// hacer funcionar para reemplazar los de abajo
 
@@ -30,4 +29,5 @@ public class Consumo {
 
 		return responseJson.getBody();
 	}
+
 }

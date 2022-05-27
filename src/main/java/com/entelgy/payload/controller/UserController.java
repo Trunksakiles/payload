@@ -17,12 +17,16 @@ import com.entelgy.payload.dto.DataEntrada;
 @RestController
 public class UserController {
 	
-	@Autowired
 	Mapeo map;
 	
 	@Autowired
-	Consumo cons;
-
+	public UserController(Mapeo map) {
+		this.map=map;
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	
 	@GetMapping("/user")
 	public String ver() {
 		return "funcionando";

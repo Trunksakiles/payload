@@ -6,9 +6,7 @@ import java.util.List;
 public class DataSalida implements Serializable {
 	private String operationDate;
 	private List<String> data;
-	public DataSalida() {
-		
-	}
+	
 	public DataSalida(String operationDate, List<String> data) {
 		super();
 		this.operationDate = operationDate;

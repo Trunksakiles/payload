@@ -11,19 +11,23 @@ import com.entelgy.payload.dto.DataSalida;
 import com.entelgy.payload.dto.User;
 
 @Service("mapeo")
-public class Mapeo {
-	
+public class Mapeo {		
 	@Autowired
 	Tiempo tiempo;
-
 	@Autowired
 	Consumo consumo;
+		
+	
+	/*public Mapeo (Tiempo tiempo,Consumo consumo) {
+		this.tiempo=tiempo;
+		this.consumo=consumo;		
+	}*/
 
-	public DataSalida reestructurar_datos() throws URISyntaxException {
+	public DataSalida reestructurar_datos() {
 
-		String srtFecha =new String(tiempo.obtenerFecha());
-		 
-		DataEntrada data_entrada=new DataEntrada();
+		String srtFecha = new String(tiempo.obtenerFecha());
+
+		DataEntrada data_entrada = new DataEntrada();
 		data_entrada = consumo.consumir();
 
 		List<User> lista_usuarios = data_entrada.getData();
@@ -37,6 +41,23 @@ public class Mapeo {
 		DataSalida data_salida = new DataSalida(srtFecha, list_strDatos);
 		return data_salida;
 	}
-	
+	/*
+	 * public DataSalida reestructurar_datos(String srtFecha,DataEntrada data_entrada) {
+		DataSalida data_salida = new DataSalida();
+		
+		List<User> lista_usuarios = data_entrada.getData();
+		List<String> list_strDatos = new ArrayList<String>();
+
+		for (User cada_usuario : lista_usuarios) {
+			String strdata = new String(
+					cada_usuario.getId() + "|" + cada_usuario.getLast_name() + "|" + cada_usuario.getEmail());
+			list_strDatos.add(strdata);
+		}
+		
+		data_salida.setOperationDate(srtFecha);
+		data_salida.setData(list_strDatos);
+		return data_salida;
+	}*/
+	 
 
 }

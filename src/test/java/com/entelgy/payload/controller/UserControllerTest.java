@@ -1,37 +1,32 @@
 package com.entelgy.payload.controller;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.net.URISyntaxException;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import com.entelgy.payload.dto.DataSalida;
-import com.entelgy.payload.service.Tiempo;
+import com.entelgy.payload.service.Mapeo;
 
 class UserControllerTest {
-
-	private UserController userController;
+	
+	Mapeo mapeo;
 	DataSalida dataSalida;
-	void inicializarUserController() {
-		userController = new UserController();
-	}
-
-	void inicializarDataSalida() {
-		dataSalida = new DataSalida();
-	}
+	UserController userController;
+	@Autowired
+	public UserControllerTest(Mapeo mapeo,DataSalida dataSalida,UserController userController) {
+		this.mapeo=mapeo;
+		this.dataSalida=dataSalida;
+		this.userController=userController;
+	}	
 
 	@Test
 	void testVerificarRespuesta() throws URISyntaxException {
-		inicializarUserController();
-		inicializarDataSalida();
+
 		Assertions.assertEquals(dataSalida, userController.pasar());
 	}
 
 	@Test
 	void testVerificarNulo() throws URISyntaxException {
-		inicializarUserController();
 		Assertions.assertNotNull(userController.pasar());
 	}
 
