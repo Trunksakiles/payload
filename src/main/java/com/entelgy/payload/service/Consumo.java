@@ -16,9 +16,9 @@ public class Consumo {
 
 	String ruta = "";
 	DataEntradaFail fail;
-
+	RestTemplate restTemplate = new RestTemplate();
 	public DataEntrada consumir() {
-		RestTemplate restTemplate = new RestTemplate();
+		
 
 		// Data_entrada responseJson =
 		// restTemplate.getForObject("https://reqres.in/api/users", Data_entrada.class);
