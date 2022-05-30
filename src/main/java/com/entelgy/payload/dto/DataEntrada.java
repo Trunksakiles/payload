@@ -11,8 +11,7 @@ public class DataEntrada implements Serializable {
 	private Integer total_pages; // datos de arriba
 	private List<User> data; // datos de usuarios
 	private DatosExtra support;// datos inferiores
-	
-	
+
 	public Integer getPage() {
 		return page;
 	}
@@ -60,8 +59,5 @@ public class DataEntrada implements Serializable {
 	public void setSupport(DatosExtra support) {
 		this.support = support;
 	}
-	
-	
 
-	
 }

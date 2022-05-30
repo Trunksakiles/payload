@@ -6,7 +6,7 @@ import java.util.List;
 public class DataSalida implements Serializable {
 	private String operationDate;
 	private List<String> data;
-	
+
 	public DataSalida(String operationDate, List<String> data) {
 		super();
 		this.operationDate = operationDate;
@@ -28,8 +28,5 @@ public class DataSalida implements Serializable {
 	public void setData(List<String> data) {
 		this.data = data;
 	}
-
-	
-		
 
 }

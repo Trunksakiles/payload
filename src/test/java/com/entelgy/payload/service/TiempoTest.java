@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 public class TiempoTest {
 
 	Tiempo tiempo = new Tiempo();
-
+//PROBAR TIEMPO COMO ENTRADA
 	@Test
 	void testVerificarFecha() {
 		String fechaTexto = tiempo.obtenerFecha();

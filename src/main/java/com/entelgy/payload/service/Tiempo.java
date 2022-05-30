@@ -2,15 +2,17 @@ package com.entelgy.payload.service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import org.springframework.stereotype.Service;
-@Service("tiempo")
+
 public class Tiempo {
 
+	private Date fecha;
+
 	public String obtenerFecha() {
-	Date fecha = new Date();
-	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ"); 
-	String fechaTexto =new String("s");
-	fechaTexto= formatter.format(fecha);
-	return fechaTexto;
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+		return formatter.format(fecha);
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 }
