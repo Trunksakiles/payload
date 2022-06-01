@@ -18,11 +18,11 @@ public class Consumo {
 	String ruta = "";
 	DataEntradaFail fail;
 	// RestTemplate restTemplate = new RestTemplate();
-
+	RestTemplate restTemplate = new RestTemplate(getClientHttpRequestFactory());
 	public DataEntrada consumir() {
 
 		// Anular el tiempo de espera con SimpleClientHttpRequestFactory
-		RestTemplate restTemplate = new RestTemplate(getClientHttpRequestFactory());
+////		RestTemplate restTemplate = new RestTemplate(getClientHttpRequestFactory());
 
 		// Data_entrada responseJson =
 		// restTemplate.getForObject("https://reqres.in/api/users", Data_entrada.class);
@@ -57,4 +57,9 @@ public class Consumo {
 	public void setRuta(String ruta) {
 		this.ruta = ruta;
 	}
+
+	public void setRestTemplate(RestTemplate restTemplate) {
+		this.restTemplate = restTemplate;
+	}
+	
 }

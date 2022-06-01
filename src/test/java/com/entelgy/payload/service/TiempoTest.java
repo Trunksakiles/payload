@@ -1,5 +1,7 @@
 package com.entelgy.payload.service;
 
+import java.util.Date;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,41 +9,29 @@ import org.mockito.Mockito;
 
 public class TiempoTest {
 
-	Tiempo mockTiempo = Mockito.mock(Tiempo.class);
-	/*
-	 * Date date=Mockito.mock(Date.class);; SimpleDateFormat
-	 * formatter=Mockito.mock(SimpleDateFormat.class);
-	 */
-//PROBAR TIEMPO COMO ENTRADA
+	Tiempo tiempo = new Tiempo();
+	Date date = Mockito.mock(Date.class);
 
 	@BeforeEach
 	void antesde() {
-		// tiempo.setFecha(date);
-		Mockito.when(mockTiempo.obtenerFecha()).thenReturn("2020/01/01T10:08:16");
-		// Mockito.when(formatter.format(date)).thenReturn("2020/01/01 10:08:16");
+		tiempo.setFecha(date);
 	}
 
 	@Test
 	void testFecha() {
-		String fechaTexto = mockTiempo.obtenerFecha();
-		Assertions.assertEquals("2020/01/01T10:08:16", mockTiempo.obtenerFecha());
+		Assertions.assertEquals("1969-12-31T19:00:00-0500", tiempo.obtenerFecha());
 	}
 
 	@Test
 	void testNulo() {
-		Assertions.assertNotNull(mockTiempo.obtenerFecha());
+		Assertions.assertNotNull(tiempo.obtenerFecha());
 	}
 
-	@Test
-	void testVerificarObtenerFecha() {
-		String fechaTexto = mockTiempo.obtenerFecha();
-		Mockito.verify(mockTiempo).obtenerFecha();
-		Mockito.verify(mockTiempo, Mockito.atLeastOnce()).obtenerFecha();
-	}
 	/*
-	 * @Test void testVerificarIteracciones() {
-	 * 
-	 * Mockito.verify(mockTiempo, Mockito.atLeastOnce()).obtenerFecha();
-	 * Mockito.verify(mockTiempo, Mockito.atMost(10)).obtenerFecha(); }
+	 * @Test void testVerificarIteracciones() { //Mockito.verify(tiempo,
+	 * Mockito.atLeastOnce()).obtenerFecha();
+	 * Mockito.verify(tiempo).obtenerFecha(); Mockito.verify(mockTiempo,
+	 * Mockito.atLeastOnce()).obtenerFecha(); Mockito.verify(mockTiempo,
+	 * Mockito.atMost(10)).obtenerFecha(); }
 	 */
 }

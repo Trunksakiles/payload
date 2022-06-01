@@ -2,6 +2,8 @@ package com.entelgy.payload.service;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.entelgy.payload.configuration.Configuracion;
 import com.entelgy.payload.dto.DataEntrada;
 import com.entelgy.payload.dto.DataSalida;
 import com.entelgy.payload.dto.User;

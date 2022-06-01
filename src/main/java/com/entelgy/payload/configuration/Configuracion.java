@@ -1,7 +1,11 @@
-package com.entelgy.payload.service;
+package com.entelgy.payload.configuration;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.entelgy.payload.service.Consumo;
+import com.entelgy.payload.service.Mapeo;
+import com.entelgy.payload.service.Tiempo;
 
 public class Configuracion {
 
