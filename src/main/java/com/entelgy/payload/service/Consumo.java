@@ -7,6 +7,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import com.entelgy.payload.dto.DataEntrada;
@@ -16,9 +17,12 @@ public class Consumo {
 
 	String ruta = "";
 	DataEntradaFail fail;
-	RestTemplate restTemplate = new RestTemplate();
+	// RestTemplate restTemplate = new RestTemplate();
+
 	public DataEntrada consumir() {
-		
+
+		// Anular el tiempo de espera con SimpleClientHttpRequestFactory
+		RestTemplate restTemplate = new RestTemplate(getClientHttpRequestFactory());
 
 		// Data_entrada responseJson =
 		// restTemplate.getForObject("https://reqres.in/api/users", Data_entrada.class);
@@ -37,9 +41,17 @@ public class Consumo {
 			responseJson = restTemplate.exchange(ruta, HttpMethod.GET, entity, DataEntrada.class);
 		} catch (RestClientException e) {
 			String msg = "Error de conexion capturado en Consumo";
-			System.out.println(msg);
+			System.out.println(msg + " --- " + e.getMessage());
 		}
 		return responseJson.getBody();
+	}
+
+	// Sobreescribir timeouts en request factory
+	private SimpleClientHttpRequestFactory getClientHttpRequestFactory() {
+		SimpleClientHttpRequestFactory clientHttpRequestFactory = new SimpleClientHttpRequestFactory();
+		clientHttpRequestFactory.setConnectTimeout(3000);
+		clientHttpRequestFactory.setReadTimeout(2000);
+		return clientHttpRequestFactory;
 	}
 
 	public void setRuta(String ruta) {
