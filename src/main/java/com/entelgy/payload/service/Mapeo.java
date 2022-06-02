@@ -1,27 +1,27 @@
 package com.entelgy.payload.service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
-import com.entelgy.payload.configuration.Configuracion;
 import com.entelgy.payload.dto.DataEntrada;
 import com.entelgy.payload.dto.DataSalida;
 import com.entelgy.payload.dto.User;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class Mapeo {
-
+	@Autowired
 	private Tiempo tiempo;
+	@Autowired
 	private Consumo consumo;
 
 	public DataSalida reestructurar_datos() {
-
-		consumo = Configuracion.getConfiguracion().getConsumo();
-		tiempo = Configuracion.getConfiguracion().getTiempo();
 		try {
-			String srtFecha = new String(tiempo.obtenerFecha());
+			Date fecha = Calendar.getInstance().getTime();
+			String srtFecha = tiempo.obtenerFormatoFecha(fecha);
 
-			DataEntrada data_entrada = new DataEntrada();
-			data_entrada = consumo.consumir();
+			DataEntrada data_entrada = consumo.consumir();
 
 			List<User> lista_usuarios = data_entrada.getData();
 			List<String> list_strDatos = new ArrayList<String>();
@@ -38,7 +38,12 @@ public class Mapeo {
 		}
 		return null;
 	}
-	
-	
-	
+
+	public void setTiempo(Tiempo tiempo) {
+		this.tiempo = tiempo;
+	}
+
+	public void setConsumo(Consumo consumo) {
+		this.consumo = consumo;
+	}
 }

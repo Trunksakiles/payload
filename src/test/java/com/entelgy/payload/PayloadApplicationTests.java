@@ -3,10 +3,10 @@ package com.entelgy.payload;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+//@SpringBootTest
 class PayloadApplicationTests {
 
-	@Test
+	//@Test
 	void contextLoads() {
 	}
 

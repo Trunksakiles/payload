@@ -1,27 +1,71 @@
 package com.entelgy.payload.service;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import com.entelgy.payload.dto.DataEntrada;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
 
-class ConsumoTest {
+import static org.junit.Assert.*;
 
-	Consumo consumo = Mockito.mock(Consumo.class);
-	DataEntrada dataEntrada = new DataEntrada();
+@RunWith(MockitoJUnitRunner.class)
+public class ConsumoTest {
+    @InjectMocks
+    Consumo consumo;
 
-// QUE NO CONECTE A INTERNET sacar la inicializacion afuera del NOTEST
+    @Mock
+    RestTemplate restTemplate;
 
-	@BeforeEach
-	void antesde() {
-		dataEntrada.setPage(1);
-		//dataEntrada_auto.setPage(1);
-		Mockito.when(consumo.consumir()).thenReturn(dataEntrada);
-	}
+    private final String RUTA = "SFSF";
+    private final DataEntrada DATA_ENTRADA = new DataEntrada();
 
-	@Test
-	void verificarRespuesta_obteniendo_pagina_1() {
-		Assertions.assertEquals(1, consumo.consumir().getPage());
-	}
+    @Mock
+    ResponseEntity responseEntity;
+
+    @Before
+    public void setUp() {
+        consumo.setRuta(RUTA);
+
+        Mockito.when(responseEntity.getBody()).thenReturn(DATA_ENTRADA);
+
+        Mockito.when(restTemplate.exchange(
+                Mockito.eq(RUTA),
+                Mockito.eq(HttpMethod.GET),
+                Mockito.any(HttpEntity.class),
+                Mockito.eq(DataEntrada.class)))
+                .thenReturn(responseEntity);
+    }
+
+    @Test
+    public void consumir() {
+        DataEntrada dataEntrada = consumo.consumir();
+
+        assertNotNull(dataEntrada);
+        assertEquals(DATA_ENTRADA, dataEntrada);
+    }
+
+    @Test
+    public void consumirConError() {
+        RestClientException restClientException = new RestClientException("dwfdwqfwedffwe");
+        Mockito.when(restTemplate.exchange(
+                        Mockito.eq(RUTA),
+                        Mockito.eq(HttpMethod.GET),
+                        Mockito.any(HttpEntity.class),
+                        Mockito.eq(DataEntrada.class)))
+                .thenThrow(restClientException);
+
+        DataEntrada dataEntrada = consumo.consumir();
+
+        assertNull(dataEntrada);
+    }
+
 }

@@ -5,6 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import static org.junit.Assert.*;
+
 class MapeoTest {
 
 	/*Tiempo mockTiempo = Mockito.mock(Tiempo.class);
@@ -13,6 +15,11 @@ class MapeoTest {
 	Mapeo mapeo = new Mapeo(); // mockTiempo, consumo);
 	// DataSalida dataSalida = new DataSalida("2022-05-27", null);
 
+	@Test
+	public void testSimple() {
+		assertTrue(true);
+	}
+	/*
 	@BeforeEach
 	void setUp() {
 		//Mockito.when(mockTiempo.obtenerFecha()).thenReturn("2020-01-01T10:08:16-0500");
