@@ -7,8 +7,8 @@ import org.mockito.Mockito;
 
 class MapeoTest {
 
-	Tiempo mockTiempo = Mockito.mock(Tiempo.class);
-	Consumo mockConsumo = Mockito.mock(Consumo.class);
+	/*Tiempo mockTiempo = Mockito.mock(Tiempo.class);
+	Consumo mockConsumo = Mockito.mock(Consumo.class);*/
 	//Consumo consumo = new Consumo();
 	Mapeo mapeo = new Mapeo(); // mockTiempo, consumo);
 	// DataSalida dataSalida = new DataSalida("2022-05-27", null);
