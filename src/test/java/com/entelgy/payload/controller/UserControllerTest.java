@@ -1,33 +1,71 @@
 package com.entelgy.payload.controller;
 
 import java.net.URISyntaxException;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.internal.stubbing.answers.ThrowsException;
+import org.mockito.junit.MockitoJUnitRunner;
+import com.entelgy.payload.dto.DataEntradaFail;
 import com.entelgy.payload.dto.DataSalida;
 import com.entelgy.payload.service.Mapeo;
+import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
-class UserControllerTest {/*
-	//String fechaActual=new String(new Date );
-	Mapeo mockMapeo = Mockito.mock(Mapeo.class);
-	DataSalida dataSalida = new DataSalida("2022-05-27", null);
-	UserController userController = new UserController(mockMapeo);
+@RunWith(MockitoJUnitRunner.class)
+public class UserControllerTest {
+	@InjectMocks
+	UserController userController; 
+	@Mock
+	Mapeo mockMapeo;
+	DataSalida dataSalidaStub = new DataSalida("2022-05-27", null);
+	//DataSalida dataSalida=null;
+	DataSalida x;
 
-	@BeforeEach
-	void setUp() {
-		Mockito.when(mockMapeo.reestructurar_datos()).thenReturn(dataSalida);
+	@Before
+	public void setUp() {
+		Mockito.when(mockMapeo.reestructurar_datos()).thenReturn(dataSalidaStub);
 	}
 
 	@Test
-	void testVerificarRespuesta() throws URISyntaxException {
-		Assertions.assertEquals("2022-05-27", userController.pasar().getOperationDate());
+	public void testVerificarRespuesta() {
+		DataSalida dataSalida=userController.pasar();
+		assertEquals(dataSalidaStub, dataSalida);
+		assertNotNull(dataSalida);
+		//assertEquals("2022-05-27", userController.pasar().getOperationDate());
+		assertThrows(DataEntradaFail.class,
+	            ()->{
+	            	Mockito.when(mockMapeo.reestructurar_datos()).thenReturn(null);
+	            	userController.pasar();
+	            });
 	}
 
-	@Test
-	void testVerificarNulo() throws URISyntaxException {
-		Assertions.assertNotNull(userController.pasar());
+	/*@Test
+	public void testPasarConError() {
+		DataEntradaFail dataEntradaFail=new DataEntradaFail("");		
+		Mockito.when(mockMapeo.reestructurar_datos()).thenReturn(null);
+		String strError="error capturado"; 
+		
+	     try {
+	    	 DataSalida dataSalida=userController.pasar();
+	    } catch (DataEntradaFail e) {
+	    	dataEntradaFail=new DataEntradaFail(strError);	
+	    }
+	     
+	     assertEquals(strError,dataEntradaFail.getMessage());
 	}*/
-
+	
+	/*@Test
+	public void itShouldThrowNullPointerExceptionWhenBlahBlah() {
+	    assertThrows(DataEntradaFail.class,
+	            ()->{
+	            	Mockito.when(mockMapeo.reestructurar_datos()).thenReturn(null);
+	            	//DataSalida dataSalida=
+						userController.pasar();
+	            });
+	}*/
 }

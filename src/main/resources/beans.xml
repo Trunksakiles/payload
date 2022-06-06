@@ -7,26 +7,25 @@
   	http://www.springframework.org/schema/context/ 
   	http://www.springframework.org/schema/context/spring-context.xsd">
 
+	<bean id="simpleClientHttpRequestFactory" class="org.springframework.http.client.SimpleClientHttpRequestFactory">
+		<property name="connectTimeout" value="3000" />
+		<property name="readTimeout" value="2000" />
+	</bean>
+	<bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+		<constructor-arg ref="simpleClientHttpRequestFactory"/>
+	</bean>
+	
 	<bean id="consumo" class="com.entelgy.payload.service.Consumo">
 	<property name="ruta" value="${ruta}" />
+	<property name="restTemplate" ref="restTemplate" />
 	</bean>
-	<bean id="mapeo" class="com.entelgy.payload.service.Mapeo"></bean>
+	<bean id="mapeo" class="com.entelgy.payload.service.Mapeo">
+		<property name="consumo" ref="consumo" />
+		<property name="tiempo" ref="tiempo" />
+	</bean>
 	<bean id="tiempo" class="com.entelgy.payload.service.Tiempo">
-	<property name="fecha" value="${fecha}" /></bean>
-	
+	</bean>
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location" value="application.properties" />
 	</bean>
-	
-<!-- <bean id="restOperations" class="org.springframework.web.client.RestTemplate">
-    <constructor-arg>
-        <bean class="org.springframework.http.client.HttpComponentsClientHttpRequestFactory">
-            <property name="readTimeout" value="${application.urlReadTimeout}" />
-            <property name="connectTimeout" value="${application.urlConnectionTimeout}" />
-        </bean>
-    </constructor-arg>
-</bean>-->
-	
-
-	
 </beans> 

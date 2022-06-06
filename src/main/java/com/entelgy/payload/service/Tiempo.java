@@ -5,14 +5,8 @@ import java.util.Date;
 
 public class Tiempo {
 
-	private Date fecha;
-
-	public String obtenerFecha() {
+	public String obtenerFormatoFecha(Date fecha) {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
 		return formatter.format(fecha);
-	}
-
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
 	}
 }

@@ -1,28 +1,25 @@
 package com.entelgy.payload.service;
 
 import java.util.Arrays;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import com.entelgy.payload.dto.DataEntrada;
-import com.entelgy.payload.dto.DataEntradaFail;
 
 public class Consumo {
 
-	String ruta = "";
-	DataEntradaFail fail;
-	// RestTemplate restTemplate = new RestTemplate();
-	RestTemplate restTemplate = new RestTemplate(getClientHttpRequestFactory());
-	public DataEntrada consumir() {
+	@Autowired
+	private RestTemplate restTemplate;
+	private String ruta;
 
-		// Anular el tiempo de espera con SimpleClientHttpRequestFactory
-////		RestTemplate restTemplate = new RestTemplate(getClientHttpRequestFactory());
+	public DataEntrada consumir() /*throws RestClientException*/ {
 
 		// Data_entrada responseJson =
 		// restTemplate.getForObject("https://reqres.in/api/users", Data_entrada.class);
@@ -30,28 +27,21 @@ public class Consumo {
 		// el setcontext type
 
 		HttpHeaders headers = new HttpHeaders();
-
 		headers.add("user-agent", "Application");
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 		headers.setContentType(MediaType.APPLICATION_JSON);
-		HttpEntity<String> entity = new HttpEntity<>(headers);
-		// ResponseEntity<DataEntrada> responseJson= new ResponseEntity<DataEntrada>;
-		ResponseEntity<DataEntrada> responseJson = new ResponseEntity<DataEntrada>(HttpStatus.OK);
+		HttpEntity entity = new HttpEntity(headers);
+		DataEntrada dataEntradaJson = null;
 		try {
-			responseJson = restTemplate.exchange(ruta, HttpMethod.GET, entity, DataEntrada.class);
+			ResponseEntity<DataEntrada> responseJson = restTemplate.exchange(ruta, HttpMethod.GET, entity,
+					DataEntrada.class);
+			dataEntradaJson = responseJson.getBody();
 		} catch (RestClientException e) {
 			String msg = "Error de conexion capturado en Consumo";
+			
 			System.out.println(msg + " --- " + e.getMessage());
 		}
-		return responseJson.getBody();
-	}
-
-	// Sobreescribir timeouts en request factory
-	private SimpleClientHttpRequestFactory getClientHttpRequestFactory() {
-		SimpleClientHttpRequestFactory clientHttpRequestFactory = new SimpleClientHttpRequestFactory();
-		clientHttpRequestFactory.setConnectTimeout(3000);
-		clientHttpRequestFactory.setReadTimeout(2000);
-		return clientHttpRequestFactory;
+		return dataEntradaJson;
 	}
 
 	public void setRuta(String ruta) {
@@ -61,5 +51,5 @@ public class Consumo {
 	public void setRestTemplate(RestTemplate restTemplate) {
 		this.restTemplate = restTemplate;
 	}
-	
+
 }
